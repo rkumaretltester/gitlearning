@@ -1,0 +1,340 @@
+Step 1. Clone your repository to your local system
+Open a browser and a terminal window from your desktop. After opening the terminal window, do the following:
+1.	Navigate to your home (~) directory
+ $ cd ~
+1.	As you use Bitbucket more, you will probably work in multiple repositories. For that reason, it's a good idea to create a directory to contain all those repositories.
+1.	Create a directory to contain your repositories.
+ $ mkdir repos
+1.	From the terminal, update the directory you want to work in to your new repos directory.
+ $ cd ~/repos
+1.	From Bitbucket, go to your BitbucketStationLocations repository.
+2.	Click the + icon in the global sidebar and select Clone this repository.
+Bitbucket displays a pop-up clone dialog. By default, the clone dialog sets the protocol to HTTPS or SSH, depending on your settings. For the purposes of this tutorial, don't change your default protocol.
+ 
+
+ 
+3.	Copy the highlighted clone command.
+4.	From your terminal window, paste the command you copied from Bitbucket and press Return.
+5.	Enter your Bitbucket password when the terminal asks for it. If you created an account by linking to Google, use your password for that account.
+o	If you experience a Windows password error:
+	In some versions of Microsoft Windows operating system and Git you might see an error similar to the one in the following example.
+Windows clone password error example
+$ git clone
+
+https://emmap1@bitbucket.org/emmap1/bitbucketstationlocations.git 
+
+Cloning into 'bitbucketspacestation'...
+
+fatal: could not read
+
+Password for 'https://emmap1@bitbucket.org': No such file or directory
+•	
+o	
+	If you get this error, enter the following at the command line:
+  $ git config --global core.askpass
+•	
+o	
+	Then go back to step 4 and repeat the clone process. The bash agent should now prompt you for your password. You should only have to do this once.
+o	At this point, your terminal window should look similar to this:
+$ cd ~/repos
+
+$ git clone https://emmap1@bitbucket.org/emmap1/bitbucketstationlocations.git
+Cloning into 'bitbucketstationlocations'...
+Password
+warning: You appear to have cloned an empty repository.
+1.	
+o	You already knew that your repository was empty right? Remember that you have added no source files to it yet.
+1.	List the contents of your repos directory and you should see your bitbucketstationlocations directory in it.
+$ ls
+Congratulations! You've cloned your repository to your local system.
+Step 2. Add a file to your local repository and put it on Bitbucket
+With the repository on your local system, it's time to get to work. You want to start keeping track of all your space station locations. To do so, let's create a file about all your locations.
+1.	Go to your terminal window and navigate to the top level of your local repository.
+ $ cd ~/repos/bitbucketstationlocations/
+1.	Enter the following line into your terminal window to create a new file with content.
+$ echo "Earth's Moon" >> locations.txt
+1.	If the command line doesn't return anything, it means you created the file correctly!
+1.	Get the status of your local repository. The git status command tells you about how your project is progressing in comparison to your Bitbucket repository.
+At this point, Git is aware that you created a new file, and you'll see something like this:
+$ git status 
+ On branch main
+ Initial commit
+ Untracked files:
+   (use "git add <file>..." to include in what will be committed)
+     locations.txt
+ nothing added to commit but untracked files present (use "git add" to track)
+1.	The file is untracked, meaning that Git sees a file not part of a previous commit. The status output also shows you the next step: adding the file.
+1.	Tell Git to track your new locations.txt file using the git add command. Just like when you created a file, the git add command doesn't return anything when you enter it correctly.
+$ git add locations.txt
+1.	The git add command moves changes from the working directory to the Git staging area. The staging area is where you prepare a snapshot of a set of changes before committing them to the official history.
+ 
+
+ 
+1.	Check the status of the file.
+ $ git status 
+ On branch main
+ Initial commit
+ Changes to be committed:
+   (use "git rm --cached <file>..." to unstage)
+     new file: locations.txt
+1.	Now you can see the new file has been added (staged) and you can commit it when you are ready. The git status command displays the state of the working directory and the staged snapshot.
+1.	Issue the git commit command with a commit message, as shown on the next line. The -m indicates that a commit message follows.
+$ git commit -m 'Initial commit' 
+ [main (root-commit) fedc3d3] Initial commit
+  1 file changed, 1 insertion(+)
+  create mode 100644 locations.txt
+1.	The git commit takes the staged snapshot and commits it to the project history. Combined with git add, this process defines the basic workflow for all Git users.
+ 
+
+ 
+Up until this point, everything you have done is on your local system and invisible to your Bitbucket repository until you push those changes.
+o	Learn a bit more about Git and remote repositories
+	Git's ability to communicate with remote repositories (in your case, Bitbucket is the remote repository) is the foundation of every Git-based collaboration workflow.
+	Git's collaboration model gives every developer their own copy of the repository, complete with its own local history and branch structure. Users typically need to share a series of commits rather than a single changeset. Instead of committing a changeset from a working copy to the central repository, Git lets you share entire branches between repositories.
+ 
+
+ 
+	You manage connections with other repositories and publish local history by "pushing" branches to other repositories. You see what others have contributed by "pulling" branches into your local repository.
+1.	Go back to your local terminal window and send your committed changes to Bitbucket using git push origin main. This command specifies that you are pushing to the main branch (the branch on Bitbucket) on origin (the Bitbucket server).
+You should see something similar to the following response:
+ $ git push origin main 
+ Counting objects: 3, done.
+ Writing objects: 100% (3/3), 253 bytes | 0 bytes/s, done.
+ Total 3 (delta 0), reused 0 (delta 0) To https://emmap1@bitbucket.org/emmap1/bitbucketstationlocations.git
+  * [new branch] main -> main
+ Branch main set up to track remote branch main from origin.
+1.	Your commits are now on the remote repository (origin).
+
+1.	Go to your BitbucketStationLocations repository on Bitbucket.
+2.	If you click Commits in the sidebar, you'll see a single commit on your repository. Bitbucket combines all the things you just did into that commit and shows it to you. You can see that the Author column shows the value you used when you configured the Git global file ( ~/.gitconfig).
+If you click Source in the sidebar, you'll see that you have a single source file in your repository, the locations.txt file you just added.
+
+Remember how the repository looked when you first created it? It probably looks a bit different now.
+
+Step 1. Clone your repository to your local system
+Open a browser and a terminal window from your desktop. After opening the terminal window, do the following:
+1.	Navigate to your home (~) directory
+ $ cd ~
+1.	As you use Bitbucket more, you will probably work in multiple repositories. For that reason, it's a good idea to create a directory to contain all those repositories.
+1.	Create a directory to contain your repositories.
+ $ mkdir repos
+1.	From the terminal, update the directory you want to work in to your new repos directory.
+ $ cd ~/repos
+1.	From Bitbucket, go to your BitbucketStationLocations repository.
+2.	Click the + icon in the global sidebar and select Clone this repository.
+Bitbucket displays a pop-up clone dialog. By default, the clone dialog sets the protocol to HTTPS or SSH, depending on your settings. For the purposes of this tutorial, don't change your default protocol.
+ 
+
+ 
+3.	Copy the highlighted clone command.
+4.	From your terminal window, paste the command you copied from Bitbucket and press Return.
+5.	Enter your Bitbucket password when the terminal asks for it. If you created an account by linking to Google, use your password for that account.
+o	If you experience a Windows password error:
+	In some versions of Microsoft Windows operating system and Git you might see an error similar to the one in the following example.
+Windows clone password error example
+$ git clone
+
+https://emmap1@bitbucket.org/emmap1/bitbucketstationlocations.git 
+
+Cloning into 'bitbucketspacestation'...
+
+fatal: could not read
+
+Password for 'https://emmap1@bitbucket.org': No such file or directory
+•	
+o	
+	If you get this error, enter the following at the command line:
+  $ git config --global core.askpass
+•	
+o	
+	Then go back to step 4 and repeat the clone process. The bash agent should now prompt you for your password. You should only have to do this once.
+o	At this point, your terminal window should look similar to this:
+$ cd ~/repos
+
+$ git clone https://emmap1@bitbucket.org/emmap1/bitbucketstationlocations.git
+Cloning into 'bitbucketstationlocations'...
+Password
+warning: You appear to have cloned an empty repository.
+1.	
+o	You already knew that your repository was empty right? Remember that you have added no source files to it yet.
+1.	List the contents of your repos directory and you should see your bitbucketstationlocations directory in it.
+$ ls
+Congratulations! You've cloned your repository to your local system.
+Step 2. Add a file to your local repository and put it on Bitbucket
+With the repository on your local system, it's time to get to work. You want to start keeping track of all your space station locations. To do so, let's create a file about all your locations.
+1.	Go to your terminal window and navigate to the top level of your local repository.
+ $ cd ~/repos/bitbucketstationlocations/
+1.	Enter the following line into your terminal window to create a new file with content.
+$ echo "Earth's Moon" >> locations.txt
+1.	If the command line doesn't return anything, it means you created the file correctly!
+1.	Get the status of your local repository. The git status command tells you about how your project is progressing in comparison to your Bitbucket repository.
+At this point, Git is aware that you created a new file, and you'll see something like this:
+$ git status 
+ On branch main
+ Initial commit
+ Untracked files:
+   (use "git add <file>..." to include in what will be committed)
+     locations.txt
+ nothing added to commit but untracked files present (use "git add" to track)
+1.	The file is untracked, meaning that Git sees a file not part of a previous commit. The status output also shows you the next step: adding the file.
+1.	Tell Git to track your new locations.txt file using the git add command. Just like when you created a file, the git add command doesn't return anything when you enter it correctly.
+$ git add locations.txt
+1.	The git add command moves changes from the working directory to the Git staging area. The staging area is where you prepare a snapshot of a set of changes before committing them to the official history.
+ 
+
+ 
+1.	Check the status of the file.
+ $ git status 
+ On branch main
+ Initial commit
+ Changes to be committed:
+   (use "git rm --cached <file>..." to unstage)
+     new file: locations.txt
+1.	Now you can see the new file has been added (staged) and you can commit it when you are ready. The git status command displays the state of the working directory and the staged snapshot.
+1.	Issue the git commit command with a commit message, as shown on the next line. The -m indicates that a commit message follows.
+$ git commit -m 'Initial commit' 
+ [main (root-commit) fedc3d3] Initial commit
+  1 file changed, 1 insertion(+)
+  create mode 100644 locations.txt
+1.	The git commit takes the staged snapshot and commits it to the project history. Combined with git add, this process defines the basic workflow for all Git users.
+ 
+
+ 
+Up until this point, everything you have done is on your local system and invisible to your Bitbucket repository until you push those changes.
+o	Learn a bit more about Git and remote repositories
+	Git's ability to communicate with remote repositories (in your case, Bitbucket is the remote repository) is the foundation of every Git-based collaboration workflow.
+	Git's collaboration model gives every developer their own copy of the repository, complete with its own local history and branch structure. Users typically need to share a series of commits rather than a single changeset. Instead of committing a changeset from a working copy to the central repository, Git lets you share entire branches between repositories.
+ 
+
+ 
+	You manage connections with other repositories and publish local history by "pushing" branches to other repositories. You see what others have contributed by "pulling" branches into your local repository.
+1.	Go back to your local terminal window and send your committed changes to Bitbucket using git push origin main. This command specifies that you are pushing to the main branch (the branch on Bitbucket) on origin (the Bitbucket server).
+You should see something similar to the following response:
+ $ git push origin main 
+ Counting objects: 3, done.
+ Writing objects: 100% (3/3), 253 bytes | 0 bytes/s, done.
+ Total 3 (delta 0), reused 0 (delta 0) To https://emmap1@bitbucket.org/emmap1/bitbucketstationlocations.git
+  * [new branch] main -> main
+ Branch main set up to track remote branch main from origin.
+1.	Your commits are now on the remote repository (origin).
+
+1.	Go to your BitbucketStationLocations repository on Bitbucket.
+2.	If you click Commits in the sidebar, you'll see a single commit on your repository. Bitbucket combines all the things you just did into that commit and shows it to you. You can see that the Author column shows the value you used when you configured the Git global file ( ~/.gitconfig).
+If you click Source in the sidebar, you'll see that you have a single source file in your repository, the locations.txt file you just added.
+
+Remember how the repository looked when you first created it? It probably looks a bit different now.
+
+Step 1. Clone your repository to your local system
+Open a browser and a terminal window from your desktop. After opening the terminal window, do the following:
+1.	Navigate to your home (~) directory
+ $ cd ~
+1.	As you use Bitbucket more, you will probably work in multiple repositories. For that reason, it's a good idea to create a directory to contain all those repositories.
+1.	Create a directory to contain your repositories.
+ $ mkdir repos
+1.	From the terminal, update the directory you want to work in to your new repos directory.
+ $ cd ~/repos
+1.	From Bitbucket, go to your BitbucketStationLocations repository.
+2.	Click the + icon in the global sidebar and select Clone this repository.
+Bitbucket displays a pop-up clone dialog. By default, the clone dialog sets the protocol to HTTPS or SSH, depending on your settings. For the purposes of this tutorial, don't change your default protocol.
+ 
+
+ 
+3.	Copy the highlighted clone command.
+4.	From your terminal window, paste the command you copied from Bitbucket and press Return.
+5.	Enter your Bitbucket password when the terminal asks for it. If you created an account by linking to Google, use your password for that account.
+o	If you experience a Windows password error:
+	In some versions of Microsoft Windows operating system and Git you might see an error similar to the one in the following example.
+Windows clone password error example
+$ git clone
+
+https://emmap1@bitbucket.org/emmap1/bitbucketstationlocations.git 
+
+Cloning into 'bitbucketspacestation'...
+
+fatal: could not read
+
+Password for 'https://emmap1@bitbucket.org': No such file or directory
+•	
+o	
+	If you get this error, enter the following at the command line:
+  $ git config --global core.askpass
+•	
+o	
+	Then go back to step 4 and repeat the clone process. The bash agent should now prompt you for your password. You should only have to do this once.
+o	At this point, your terminal window should look similar to this:
+$ cd ~/repos
+
+$ git clone https://emmap1@bitbucket.org/emmap1/bitbucketstationlocations.git
+Cloning into 'bitbucketstationlocations'...
+Password
+warning: You appear to have cloned an empty repository.
+1.	
+o	You already knew that your repository was empty right? Remember that you have added no source files to it yet.
+1.	List the contents of your repos directory and you should see your bitbucketstationlocations directory in it.
+$ ls
+Congratulations! You've cloned your repository to your local system.
+Step 2. Add a file to your local repository and put it on Bitbucket
+With the repository on your local system, it's time to get to work. You want to start keeping track of all your space station locations. To do so, let's create a file about all your locations.
+1.	Go to your terminal window and navigate to the top level of your local repository.
+ $ cd ~/repos/bitbucketstationlocations/
+1.	Enter the following line into your terminal window to create a new file with content.
+$ echo "Earth's Moon" >> locations.txt
+1.	If the command line doesn't return anything, it means you created the file correctly!
+1.	Get the status of your local repository. The git status command tells you about how your project is progressing in comparison to your Bitbucket repository.
+At this point, Git is aware that you created a new file, and you'll see something like this:
+$ git status 
+ On branch main
+ Initial commit
+ Untracked files:
+   (use "git add <file>..." to include in what will be committed)
+     locations.txt
+ nothing added to commit but untracked files present (use "git add" to track)
+1.	The file is untracked, meaning that Git sees a file not part of a previous commit. The status output also shows you the next step: adding the file.
+1.	Tell Git to track your new locations.txt file using the git add command. Just like when you created a file, the git add command doesn't return anything when you enter it correctly.
+$ git add locations.txt
+1.	The git add command moves changes from the working directory to the Git staging area. The staging area is where you prepare a snapshot of a set of changes before committing them to the official history.
+ 
+
+ 
+1.	Check the status of the file.
+ $ git status 
+ On branch main
+ Initial commit
+ Changes to be committed:
+   (use "git rm --cached <file>..." to unstage)
+     new file: locations.txt
+1.	Now you can see the new file has been added (staged) and you can commit it when you are ready. The git status command displays the state of the working directory and the staged snapshot.
+1.	Issue the git commit command with a commit message, as shown on the next line. The -m indicates that a commit message follows.
+$ git commit -m 'Initial commit' 
+ [main (root-commit) fedc3d3] Initial commit
+  1 file changed, 1 insertion(+)
+  create mode 100644 locations.txt
+1.	The git commit takes the staged snapshot and commits it to the project history. Combined with git add, this process defines the basic workflow for all Git users.
+ 
+
+ 
+Up until this point, everything you have done is on your local system and invisible to your Bitbucket repository until you push those changes.
+o	Learn a bit more about Git and remote repositories
+	Git's ability to communicate with remote repositories (in your case, Bitbucket is the remote repository) is the foundation of every Git-based collaboration workflow.
+	Git's collaboration model gives every developer their own copy of the repository, complete with its own local history and branch structure. Users typically need to share a series of commits rather than a single changeset. Instead of committing a changeset from a working copy to the central repository, Git lets you share entire branches between repositories.
+ 
+
+ 
+	You manage connections with other repositories and publish local history by "pushing" branches to other repositories. You see what others have contributed by "pulling" branches into your local repository.
+1.	Go back to your local terminal window and send your committed changes to Bitbucket using git push origin main. This command specifies that you are pushing to the main branch (the branch on Bitbucket) on origin (the Bitbucket server).
+You should see something similar to the following response:
+ $ git push origin main 
+ Counting objects: 3, done.
+ Writing objects: 100% (3/3), 253 bytes | 0 bytes/s, done.
+ Total 3 (delta 0), reused 0 (delta 0) To https://emmap1@bitbucket.org/emmap1/bitbucketstationlocations.git
+  * [new branch] main -> main
+ Branch main set up to track remote branch main from origin.
+1.	Your commits are now on the remote repository (origin).
+
+1.	Go to your BitbucketStationLocations repository on Bitbucket.
+2.	If you click Commits in the sidebar, you'll see a single commit on your repository. Bitbucket combines all the things you just did into that commit and shows it to you. You can see that the Author column shows the value you used when you configured the Git global file ( ~/.gitconfig).
+If you click Source in the sidebar, you'll see that you have a single source file in your repository, the locations.txt file you just added.
+
+Remember how the repository looked when you first created it? It probably looks a bit different now.
+
+
